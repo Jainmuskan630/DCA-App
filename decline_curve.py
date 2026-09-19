@@ -35,12 +35,14 @@ if uploaded_file:
     rate_col = st.selectbox("Select RATE column", cols)
 
     # ── Convert date to T_DAYS ────────────────────
-    if df[time_col].dtype == 'object':
+        if not pd.api.types.is_numeric_dtype(df[time_col]):
         df[time_col] = pd.to_datetime(
-            df[time_col],
+            df[time_col].astype(str),
             format='mixed',
-            dayfirst=False
+            dayfirst=False,
+            errors='coerce'
         )
+        df = df.dropna(subset=[time_col])
 
     if pd.api.types.is_datetime64_any_dtype(df[time_col]):
         df['T_DAYS'] = (df[time_col] - df[time_col].min()).dt.days
