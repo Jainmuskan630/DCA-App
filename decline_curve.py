@@ -35,7 +35,7 @@ if uploaded_file:
     rate_col = st.selectbox("Select RATE column", cols)
 
     # ── Convert date to T_DAYS ────────────────────
-        if not pd.api.types.is_numeric_dtype(df[time_col]):
+    if not pd.api.types.is_numeric_dtype(df[time_col]):
         df[time_col] = pd.to_datetime(
             df[time_col].astype(str),
             format='mixed',
