@@ -152,6 +152,8 @@ if uploaded_file:
 
     # ── Decline period slider ─────────────────────
     st.subheader("Select Decline Period")
+    st.write(df[time_col].dtype, df[time_col].min(), df[time_col].isna().sum())
+    
     min_day = int(df[time_col].min())
     max_day = int(df[time_col].max())
 
